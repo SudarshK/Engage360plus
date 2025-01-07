@@ -1,0 +1,6 @@
+@Engage360plus_HostAddress = http://localhost:5189
+
+GET {{Engage360plus_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
