@@ -15,7 +15,7 @@ namespace Engage360plus.Controllers
         private readonly IMapper mapper;
         private readonly ICustomerRepository customerRepository;
 
-        public CustomerController(IMapper mapper,ICustomerRepository customerRepository)
+        public CustomerController(IMapper mapper, ICustomerRepository customerRepository)
         {
             this.mapper = mapper;
             this.customerRepository = customerRepository;
@@ -30,14 +30,26 @@ namespace Engage360plus.Controllers
             //Map Domain Model to DTO
             return Ok(mapper.Map<CustomerDetailsDto>(customerDetailsModel));
         }
-        
+
         //https://localhost:portnumber/api/customer
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
-            var customerDomainModel= await customerRepository.GetAllCustomerAsync();
-            
+            var customerDomainModel = await customerRepository.GetAllCustomerAsync();
+
             return Ok(mapper.Map<List<CustomerDetailsDto>>(customerDomainModel));
+        }
+
+        [HttpGet]
+        [Route("{id:int}")]
+        public async Task<IActionResult>GetCustomerById([FromRoute]int id)
+        {
+            var customerDomainModel= await customerRepository.GetCustomerByIdAsync(id);
+            if(customerDomainModel == null)
+            {
+                return NotFound();
+            }
+            return Ok(mapper.Map<CustomerDetailsDto>(customerDomainModel));
         }
     }
 }

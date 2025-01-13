@@ -19,9 +19,10 @@ namespace Engage360plus.Repository
             return customerModel;
         }
 
-        public Task<CustomerDetails> GetCustomerByIdAsync()
+        public async Task<CustomerDetails?> GetCustomerByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var customerModel = await dbContext.CustomerDetails.Include("Addresses").Include("ProductStatus").FirstOrDefaultAsync(x => x.CustomerID == id);
+            return customerModel;
         }
 
         public async Task<CustomerDetails> RegisterCustomerAsync(CustomerDetails customerDetails)

@@ -10,7 +10,7 @@
         //public int ProductID { get; set; }
         public int StatusId { get; set; }
 
-        public AddressesDto Addresses { get; set; }
-        public ProductStatusDto ProductStatus { get; set; }
+        /*public AddressesDto Addresses { get; set; }
+        public ProductStatusDto ProductStatus { get; set; }*/
     }
 }
