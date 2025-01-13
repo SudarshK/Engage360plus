@@ -1,4 +1,6 @@
 using Engage360plus.Data;
+using Engage360plus.Mappings;
+using Engage360plus.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,8 +13,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<CRMDbContext>(options=>
 options.UseSqlServer(builder.Configuration.GetConnectionString("CRMConnectionString")));
+builder.Services.AddScoped<IAddressRepository, SQLAddressRepository>();
+builder.Services.AddScoped<ICustomerRepository , SQLCustomerRepository >();
+//builder.Services.AddScoped<IAddressRepository,InMemoryAddressRepository>();
+builder.Services.AddAutoMapper(typeof(AutomapperProfiles));
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

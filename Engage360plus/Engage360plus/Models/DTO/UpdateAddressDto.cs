@@ -1,10 +1,7 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Engage360plus.Models.DTO
+﻿namespace Engage360plus.Models.DTO
 {
-    public class AddressesDto
+    public class UpdateAddressDto
     {
-        public int AddressId { get; set; }
         public string City { get; set; }
         public string Region { get; set; }
         public string PostalCode { get; set; }

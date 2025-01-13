@@ -30,24 +30,62 @@ namespace Engage360plus.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AddressId"));
 
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PostalCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Region")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AddressId");
 
                     b.ToTable("Addresses");
+
+                    b.HasData(
+                        new
+                        {
+                            AddressId = 1,
+                            City = "Pune0",
+                            Country = "India0",
+                            PostalCode = "411072",
+                            Region = "Pune0"
+                        },
+                        new
+                        {
+                            AddressId = 2,
+                            City = "Pune1",
+                            Country = "India1",
+                            PostalCode = "411072",
+                            Region = "Pune1"
+                        },
+                        new
+                        {
+                            AddressId = 3,
+                            City = "Pune2",
+                            Country = "India2",
+                            PostalCode = "411072",
+                            Region = "Pune2"
+                        },
+                        new
+                        {
+                            AddressId = 4,
+                            City = "Pune0",
+                            Country = "India0",
+                            PostalCode = "411072",
+                            Region = "Pune0"
+                        },
+                        new
+                        {
+                            AddressId = 5,
+                            City = "Pune0",
+                            Country = "India0",
+                            PostalCode = "411072",
+                            Region = "Pune0"
+                        });
                 });
 
             modelBuilder.Entity("Engage360plus.Models.Domain.CustomerDetails", b =>
@@ -72,37 +110,53 @@ namespace Engage360plus.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int>("ProductStatusStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StatusId")
                         .HasColumnType("int");
 
                     b.HasKey("CustomerID");
 
                     b.HasIndex("AddressesAddressId");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("ProductStatusStatusId");
 
                     b.ToTable("CustomerDetails");
                 });
 
-            modelBuilder.Entity("Engage360plus.Models.Domain.CustomerProduct", b =>
+            modelBuilder.Entity("Engage360plus.Models.Domain.ProductStatus", b =>
                 {
-                    b.Property<int>("CustomerID")
+                    b.Property<int>("StatusId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StatusId"));
 
-                    b.Property<string>("CustomerEmail")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CustomerName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("StatusId");
 
-                    b.HasKey("CustomerID");
+                    b.ToTable("ProductStatuses");
 
-                    b.ToTable("CustomerProducts");
+                    b.HasData(
+                        new
+                        {
+                            StatusId = 1,
+                            Name = "In Discussion"
+                        },
+                        new
+                        {
+                            StatusId = 2,
+                            Name = "Paid"
+                        },
+                        new
+                        {
+                            StatusId = 3,
+                            Name = "Rejected"
+                        });
                 });
 
             modelBuilder.Entity("Engage360plus.Models.Domain.CustomerDetails", b =>
@@ -113,15 +167,15 @@ namespace Engage360plus.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Engage360plus.Models.Domain.CustomerProduct", "Product")
+                    b.HasOne("Engage360plus.Models.Domain.ProductStatus", "ProductStatus")
                         .WithMany()
-                        .HasForeignKey("ProductId")
+                        .HasForeignKey("ProductStatusStatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Addresses");
 
-                    b.Navigation("Product");
+                    b.Navigation("ProductStatus");
                 });
 #pragma warning restore 612, 618
         }
