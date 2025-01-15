@@ -6,6 +6,6 @@ namespace Engage360plus.Repository
     {
         Task<CustomerDetails> RegisterCustomerAsync(CustomerDetails customerDetails);
         Task<List<CustomerDetails>> GetAllCustomerAsync();
-        Task<CustomerDetails?> GetCustomerByIdAsync(int id);
+        Task<CustomerDetails?> GetCustomerByIdAsync(Guid id);
     }
 }

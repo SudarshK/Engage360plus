@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -7,7 +8,7 @@
 namespace Engage360plus.Migrations
 {
     /// <inheritdoc />
-    public partial class NavigationProperties : Migration
+    public partial class Idchanged : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,8 +17,7 @@ namespace Engage360plus.Migrations
                 name: "Addresses",
                 columns: table => new
                 {
-                    AddressId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Region = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -25,83 +25,79 @@ namespace Engage360plus.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Addresses", x => x.AddressId);
+                    table.PrimaryKey("PK_Addresses", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductStatuses",
+                name: "ProductStatus",
                 columns: table => new
                 {
-                    StatusId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductStatuses", x => x.StatusId);
+                    table.PrimaryKey("PK_ProductStatus", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "CustomerDetails",
                 columns: table => new
                 {
-                    CustomerID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CustomerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CustomerEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AddressId = table.Column<int>(type: "int", nullable: false),
-                    StatusId = table.Column<int>(type: "int", nullable: false),
-                    AddressesAddressId = table.Column<int>(type: "int", nullable: false),
-                    ProductStatusStatusId = table.Column<int>(type: "int", nullable: false)
+                    AddressId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductStatusId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CustomerDetails", x => x.CustomerID);
+                    table.PrimaryKey("PK_CustomerDetails", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CustomerDetails_Addresses_AddressesAddressId",
-                        column: x => x.AddressesAddressId,
+                        name: "FK_CustomerDetails_Addresses_AddressId",
+                        column: x => x.AddressId,
                         principalTable: "Addresses",
-                        principalColumn: "AddressId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CustomerDetails_ProductStatuses_ProductStatusStatusId",
-                        column: x => x.ProductStatusStatusId,
-                        principalTable: "ProductStatuses",
-                        principalColumn: "StatusId",
+                        name: "FK_CustomerDetails_ProductStatus_ProductStatusId",
+                        column: x => x.ProductStatusId,
+                        principalTable: "ProductStatus",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
                 table: "Addresses",
-                columns: new[] { "AddressId", "City", "Country", "PostalCode", "Region" },
+                columns: new[] { "Id", "City", "Country", "PostalCode", "Region" },
                 values: new object[,]
                 {
-                    { 1, "Pune0", "India0", "411072", "Pune0" },
-                    { 2, "Pune1", "India1", "411072", "Pune1" },
-                    { 3, "Pune2", "India2", "411072", "Pune2" },
-                    { 4, "Pune0", "India0", "411072", "Pune0" },
-                    { 5, "Pune0", "India0", "411072", "Pune0" }
+                    { new Guid("c2b30590-bc31-42de-a9b5-a3054eba5b41"), "Pune0", "India0", "411072", "Pune0" },
+                    { new Guid("c2b30590-bc31-42de-a9b5-a3054eba5b42"), "Pune1", "India1", "411072", "Pune1" },
+                    { new Guid("c2b30590-bc31-42de-a9b5-a3054eba5b43"), "Pune2", "India2", "411072", "Pune2" },
+                    { new Guid("c2b30590-bc31-42de-a9b5-a3054eba5b44"), "Pune0", "India0", "411072", "Pune0" },
+                    { new Guid("c2b30590-bc31-42de-a9b5-a3054eba5b46"), "Pune0", "India0", "411072", "Pune0" }
                 });
 
             migrationBuilder.InsertData(
-                table: "ProductStatuses",
-                columns: new[] { "StatusId", "Name" },
+                table: "ProductStatus",
+                columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, "In Discussion" },
-                    { 2, "Paid" },
-                    { 3, "Rejected" }
+                    { new Guid("8d2ee75c-1d3f-4e54-9d3d-d9d4577dfedf"), "Paid" },
+                    { new Guid("c2b30590-bc31-42de-a9b5-a3054eba5b45"), "Rejected" },
+                    { new Guid("e89c34df-12c2-4dd1-a4a3-8740380f0f84"), "In Discussion" }
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CustomerDetails_AddressesAddressId",
+                name: "IX_CustomerDetails_AddressId",
                 table: "CustomerDetails",
-                column: "AddressesAddressId");
+                column: "AddressId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CustomerDetails_ProductStatusStatusId",
+                name: "IX_CustomerDetails_ProductStatusId",
                 table: "CustomerDetails",
-                column: "ProductStatusStatusId");
+                column: "ProductStatusId");
         }
 
         /// <inheritdoc />
@@ -114,7 +110,7 @@ namespace Engage360plus.Migrations
                 name: "Addresses");
 
             migrationBuilder.DropTable(
-                name: "ProductStatuses");
+                name: "ProductStatus");
         }
     }
 }

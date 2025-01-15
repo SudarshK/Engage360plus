@@ -2,13 +2,13 @@
 {
     public class AddCustomerRequestDto
     {
-        public int CustomerID { get; set; }
+        public Guid CustomerID { get; set; }
         public string CustomerName { get; set; }
         public string CustomerEmail { get; set; }
 
-        public int AddressId { get; set; }
-        //public int ProductID { get; set; }
-        public int StatusId { get; set; }
+        public Guid AddressId { get; set; }
+        //public int Id { get; set; }
+        public Guid ProductStatusId { get; set; }
 
         /*public AddressesDto Addresses { get; set; }
         public ProductStatusDto ProductStatus { get; set; }*/

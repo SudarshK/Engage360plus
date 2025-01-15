@@ -15,13 +15,15 @@ namespace Engage360plus.Repository
 
         public async Task<List<CustomerDetails>> GetAllCustomerAsync()
         {
-            var customerModel= await dbContext.CustomerDetails.Include("ProductStatus").Include("Addresses").ToListAsync();
+            var customerModel= await dbContext.CustomerDetails.Include(c=>c.Address).Include("ProductStatus").ToListAsync();
             return customerModel;
         }
 
-        public async Task<CustomerDetails?> GetCustomerByIdAsync(int id)
+        public async Task<CustomerDetails?> GetCustomerByIdAsync(Guid id)
         {
-            var customerModel = await dbContext.CustomerDetails.Include("Addresses").Include("ProductStatus").FirstOrDefaultAsync(x => x.CustomerID == id);
+            var customerModel = await dbContext.CustomerDetails.Include(c=>c.Address)
+                .Include("ProductStatus")
+                .FirstOrDefaultAsync(x => x.Id == id);
             return customerModel;
         }
 

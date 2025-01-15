@@ -14,9 +14,9 @@ namespace Engage360plus.Repository
             this.dbContext = dbContext;
         }
 
-        public async Task<Addresses?> DeleteAddressAsync(int id)
+        public async Task<Addresses?> DeleteAddressAsync(Guid id)
         {
-            var existingAddress= await dbContext.Addresses.FirstOrDefaultAsync(x=>x.AddressId==id);
+            var existingAddress= await dbContext.Addresses.FirstOrDefaultAsync(x=>x.Id==id);
             if (existingAddress == null)
             {
                 return null;
@@ -26,9 +26,9 @@ namespace Engage360plus.Repository
             return existingAddress;
         }
 
-        public async Task<Addresses?> GetAddressById(int id)
+        public async Task<Addresses?> GetAddressById(Guid id)
         {
-            return await dbContext.Addresses.FirstOrDefaultAsync(x => x.AddressId == id);
+            return await dbContext.Addresses.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<List<Addresses>> GetAllAddressesAsync()
@@ -43,9 +43,9 @@ namespace Engage360plus.Repository
             return (addresses);
         }
 
-        public async Task<Addresses?> UpdateAddressAsync(int id, Addresses addresses)
+        public async Task<Addresses?> UpdateAddressAsync(Guid id, Addresses addresses)
         {
-            var existingAddress = await dbContext.Addresses.FirstOrDefaultAsync(x => x.AddressId == id);
+            var existingAddress = await dbContext.Addresses.FirstOrDefaultAsync(x => x.Id == id);
             if (existingAddress == null)
             {
                 return null;

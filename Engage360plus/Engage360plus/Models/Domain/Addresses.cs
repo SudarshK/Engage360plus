@@ -5,8 +5,8 @@ namespace Engage360plus.Models.Domain
 {
     public class Addresses
     {
-        [Key]
-        public int AddressId {  get; set; }
+        
+        public Guid Id {  get; set; }
         public string? City { get; set; }
         public string? Region { get; set; }
         public string? PostalCode { get; set; }

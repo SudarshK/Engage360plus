@@ -28,7 +28,7 @@ namespace Engage360plus.Controllers
             var addressDomainModel = mapper.Map<Addresses>(addAddressesdto);
             //var addressDomainModel = new Addresses
             //{
-            //    AddressId = addAddressesdto.AddressId,
+            //    Id = addAddressesdto.Id,
             //    City = addAddressesdto.City,
             //    Country = addAddressesdto.Country,
             //    PostalCode = addAddressesdto.PostalCode,
@@ -38,21 +38,21 @@ namespace Engage360plus.Controllers
             addressDomainModel = await addressRepository.RegisterAddressToCustomerAsync(addressDomainModel);
             //var addressDto = new AddressesDto
             //{
-            //    AddressId = addressDomainModel.AddressId,
+            //    Id = addressDomainModel.Id,
             //    City = addressDomainModel.City,
             //    Country = addressDomainModel.Country,
             //    PostalCode = addressDomainModel.PostalCode,
             //    Region = addressDomainModel.Region
             //};
-            var addressDto = mapper.Map<AddAddresstoCustomerDto>(addAddressesdto);
-            return CreatedAtAction(nameof(RegisterAddressToCustomer), new { id = addressDto.AddressId }, addressDto);
+            var addressDto = mapper.Map<AddressesDto>(addressDomainModel);
+            return CreatedAtAction(nameof(RegisterAddressToCustomer), new { id = addressDto.Id }, addressDto);
         }
 
         [HttpPut]
-        [Route("{id:int}")]
-        public async Task<IActionResult> UpdateAddressAsync([FromRoute] int id, [FromBody] UpdateAddressDto updateAddressDto)
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> UpdateAddressAsync([FromRoute] Guid id, [FromBody] UpdateAddressDto updateAddressDto)
         {
-            //var addressDomainModel = await dbContext.Addresses.FirstOrDefaultAsync(x => x.AddressId == id);
+            //var addressDomainModel = await dbContext.Addresses.FirstOrDefaultAsync(x => x.Id == id);
             var addressDomainModel = mapper.Map<Addresses>(updateAddressDto);
             //var addressDomainModel = new Addresses
             //{
@@ -91,7 +91,7 @@ namespace Engage360plus.Controllers
             //{
             //    addressDto.Add(new AddressesDto()
             //    {
-            //        AddressId = addressDomain.AddressId,
+            //        Id = addressDomain.Id,
             //        City = addressDomain.City,
             //        Region = addressDomain.Region,
             //        PostalCode = addressDomain.PostalCode,
@@ -105,11 +105,11 @@ namespace Engage360plus.Controllers
         }
 
         [HttpGet]
-        [Route("id:int")]
-        public async Task<IActionResult> GetAddressById(int id)
+        [Route("id:Guid")]
+        public async Task<IActionResult> GetAddressById(Guid id)
         {
             //var address = dbContext.Addresses.Find(id);
-            //var address = await dbContext.Addresses.FirstOrDefaultAsync(x => x.AddressId == id);
+            //var address = await dbContext.Addresses.FirstOrDefaultAsync(x => x.Id == id);
             var address = await addressRepository.GetAddressById(id);
 
             if (address == null)
@@ -128,10 +128,10 @@ namespace Engage360plus.Controllers
         }
 
         [HttpDelete]
-        [Route("{id:int}")]
-        public async Task<IActionResult> DeleteAddressAsync([FromRoute] int id)
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> DeleteAddressAsync([FromRoute] Guid id)
         {
-            //var addressDomainModel= await dbContext.Addresses.FirstOrDefaultAsync(x => x.AddressId == id);
+            //var addressDomainModel= await dbContext.Addresses.FirstOrDefaultAsync(x => x.Id == id);
             var addressDomainModel = await addressRepository.DeleteAddressAsync(id);
             if (addressDomainModel == null)
             {
@@ -139,7 +139,7 @@ namespace Engage360plus.Controllers
             }
             //var addressDto = new Addresses
             //{
-            //    AddressId = addressDomainModel.AddressId,
+            //    Id = addressDomainModel.Id,
             //    City = addressDomainModel.City,
             //    Country = addressDomainModel.Country,
             //    PostalCode = addressDomainModel.PostalCode,

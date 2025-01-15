@@ -2,11 +2,11 @@
 {
     public class CustomerDetailsDto
     {
-        public int CustomerID { get; set; }
+        public Guid CustomerID { get; set; }
         public string CustomerName { get; set; }
         public string CustomerEmail { get; set; }
 
-        public AddressesDto Addresses { get; set; }
+        public AddressesDto Address { get; set; }
         public ProductStatusDto ProductStatus { get; set; }
         
     }

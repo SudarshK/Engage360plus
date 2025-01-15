@@ -41,8 +41,8 @@ namespace Engage360plus.Controllers
         }
 
         [HttpGet]
-        [Route("{id:int}")]
-        public async Task<IActionResult>GetCustomerById([FromRoute]int id)
+        [Route("{id:Guid}")]
+        public async Task<IActionResult>GetCustomerById([FromRoute] Guid id)
         {
             var customerDomainModel= await customerRepository.GetCustomerByIdAsync(id);
             if(customerDomainModel == null)

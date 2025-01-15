@@ -4,12 +4,12 @@ namespace Engage360plus.Repository
 {
     public class InMemoryAddressRepository:IAddressRepository
     {
-        public Task<Addresses?> DeleteAddressAsync(int id)
+        public Task<Addresses?> DeleteAddressAsync(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Addresses?> GetAddressById(int id)
+        public Task<Addresses?> GetAddressById(Guid id)
         {
             throw new NotImplementedException();
         }
@@ -21,7 +21,7 @@ namespace Engage360plus.Repository
             {
                 new Addresses()
                 {
-                    AddressId = 12,
+                    Id = Guid.Parse("c2b30590-bc31-42de-a9b5-a3054eba5b47"),
                     City = "Nagpur",
                     Country = "India",
                     PostalCode = "12345",
@@ -35,7 +35,7 @@ namespace Engage360plus.Repository
             throw new NotImplementedException();
         }
 
-        public Task<Addresses?> UpdateAddressAsync(int id, Addresses addresses)
+        public Task<Addresses?> UpdateAddressAsync(Guid id, Addresses addresses)
         {
             throw new NotImplementedException();
         }

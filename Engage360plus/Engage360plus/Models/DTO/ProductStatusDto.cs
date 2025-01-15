@@ -2,7 +2,7 @@
 {
     public class ProductStatusDto
     {
-        public int StatusId { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
     }
 }

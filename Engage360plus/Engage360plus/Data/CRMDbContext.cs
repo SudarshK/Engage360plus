@@ -12,7 +12,7 @@ namespace Engage360plus.Data
         public DbSet<Addresses> Addresses { get; set; }
         //public DbSet<CustomerProduct> CustomerProducts { get; set; }
         public DbSet<CustomerDetails> CustomerDetails { get; set; }
-        public DbSet<ProductStatus> ProductStatuses { get; set; }
+        public DbSet<ProductStatus> ProductStatus { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -22,17 +22,17 @@ namespace Engage360plus.Data
             {
                 new ProductStatus()
                 {
-                    StatusId = 1,
+                    Id = Guid.Parse("e89c34df-12c2-4dd1-a4a3-8740380f0f84"),
                     Name = "In Discussion"
                 },
                 new ProductStatus()
                 {
-                    StatusId = 2,
+                    Id = Guid.Parse("8d2ee75c-1d3f-4e54-9d3d-d9d4577dfedf"),
                     Name = "Paid",
                 },
                 new ProductStatus()
                 {
-                    StatusId = 3,
+                    Id = Guid.Parse("c2b30590-bc31-42de-a9b5-a3054eba5b45"),
                     Name = "Rejected",
                 }
             };
@@ -45,7 +45,7 @@ namespace Engage360plus.Data
             {
                 new Addresses
                 {
-                    AddressId = 1,
+                    Id = Guid.Parse("c2b30590-bc31-42de-a9b5-a3054eba5b41"),
                     City="Pune0",
                     Country="India0",
                     PostalCode="411072",
@@ -53,7 +53,7 @@ namespace Engage360plus.Data
                 },
                 new Addresses
                 {
-                    AddressId = 2,
+                    Id = Guid.Parse("c2b30590-bc31-42de-a9b5-a3054eba5b42"),
                     City="Pune1",
                     Country="India1",
                     PostalCode="411072",
@@ -61,7 +61,7 @@ namespace Engage360plus.Data
                 },
                 new Addresses
                 {
-                    AddressId = 3,
+                    Id = Guid.Parse("c2b30590-bc31-42de-a9b5-a3054eba5b43"),
                     City="Pune2",
                     Country="India2",
                     PostalCode="411072",
@@ -69,7 +69,7 @@ namespace Engage360plus.Data
                 }
                 ,new Addresses
                 {
-                    AddressId = 4,
+                    Id = Guid.Parse("c2b30590-bc31-42de-a9b5-a3054eba5b44"),
                     City="Pune0",
                     Country="India0",
                     PostalCode="411072",
@@ -77,7 +77,7 @@ namespace Engage360plus.Data
                 },
                 new Addresses
                 {
-                    AddressId = 5,
+                    Id = Guid.Parse("c2b30590-bc31-42de-a9b5-a3054eba5b46"),
                     City="Pune0",
                     Country="India0",
                     PostalCode="411072",

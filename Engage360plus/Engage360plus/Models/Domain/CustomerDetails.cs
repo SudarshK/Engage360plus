@@ -5,16 +5,15 @@ namespace Engage360plus.Models.Domain
 {
     public class CustomerDetails
     {
-        [Key]
-        public int CustomerID { get; set; }
+        public Guid Id { get; set; }
         public string CustomerName { get; set; }
         public string CustomerEmail { get; set; }
 
-        public int AddressId {  get; set; }
-        //public int ProductID {  get; set; }
-        public int StatusId {  get; set; }
+        public Guid AddressId {  get; set; }
+        //public int Id {  get; set; }
+        public Guid ProductStatusId {  get; set; }
         //Navigation Properties
-        public Addresses Addresses { get; set; }
+        public Addresses Address { get; set; }
         //public CustomerProduct? Product { get; set; }
         public ProductStatus ProductStatus { get; set; }
     }
