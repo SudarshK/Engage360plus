@@ -14,6 +14,7 @@ namespace Engage360plus.Mappings
             CreateMap<AddCustomerRequestDto, CustomerDetails>().ReverseMap();
             CreateMap<CustomerDetails, CustomerDetailsDto>().ReverseMap();
             CreateMap<ProductStatus, ProductStatusDto>().ReverseMap();
+            CreateMap<UpdateCustomerRequestDto, CustomerDetails>().ReverseMap();
             
         }
     }

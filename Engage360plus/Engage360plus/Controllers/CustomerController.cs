@@ -51,5 +51,19 @@ namespace Engage360plus.Controllers
             }
             return Ok(mapper.Map<CustomerDetailsDto>(customerDomainModel));
         }
+
+        [HttpPut]
+        [Route("{id:guid}")]
+        public async Task<IActionResult> UpdateCustomer([FromRoute]Guid id, UpdateCustomerRequestDto updateCustomerRequestDto)
+        {
+            var customerDomainModel = mapper.Map<CustomerDetails>(updateCustomerRequestDto);
+            customerDomainModel = await customerRepository.UpdateAsync(id,customerDomainModel);
+            if(customerDomainModel == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(mapper.Map<CustomerDetailsDto>(customerDomainModel));
+        }
     }
 }

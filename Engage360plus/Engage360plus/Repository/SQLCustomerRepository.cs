@@ -1,5 +1,6 @@
 ﻿using Engage360plus.Data;
 using Engage360plus.Models.Domain;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace Engage360plus.Repository
@@ -32,6 +33,21 @@ namespace Engage360plus.Repository
             await dbContext.CustomerDetails.AddAsync(customerDetails);
             await dbContext.SaveChangesAsync();
             return customerDetails;
+        }
+
+        public async Task<CustomerDetails?> UpdateAsync(Guid id, CustomerDetails customerDetails)
+        {
+            var existingCustomer= await dbContext.CustomerDetails.FirstOrDefaultAsync(x => x.Id == id);
+            if (existingCustomer == null)
+            {
+                return null;
+            }
+            existingCustomer.CustomerName = customerDetails.CustomerName;
+            existingCustomer.CustomerEmail = customerDetails.CustomerEmail;
+            existingCustomer.AddressId = customerDetails.AddressId;
+            existingCustomer.ProductStatusId = customerDetails.ProductStatusId;
+            await dbContext.SaveChangesAsync();
+            return existingCustomer;
         }
     }
 }
