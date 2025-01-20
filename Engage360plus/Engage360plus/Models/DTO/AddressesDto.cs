@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Engage360plus.Models.DTO
+﻿namespace Engage360plus.Models.DTO
 {
     public class AddressesDto
     {
