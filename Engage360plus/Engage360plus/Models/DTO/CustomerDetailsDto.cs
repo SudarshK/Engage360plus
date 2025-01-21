@@ -5,7 +5,7 @@ namespace Engage360plus.Models.DTO
 {
     public class CustomerDetailsDto
     {
-        public Guid CustomerID { get; set; }
+        public Guid Id { get; set; }
         public string CustomerName { get; set; }
         public string CustomerEmail { get; set; }
         public AddressesDto Address { get; set; }

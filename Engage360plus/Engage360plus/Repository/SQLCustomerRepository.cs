@@ -14,10 +14,34 @@ namespace Engage360plus.Repository
             this.dbContext = dbContext;
         }
 
-        public async Task<List<CustomerDetails>> GetAllCustomerAsync()
+        public async Task<List<CustomerDetails>> GetAllCustomerAsync(string? filterOn = null, string? filterQuery = null, string? sortBy = null, bool isAscending = true)
         {
-            var customerModel= await dbContext.CustomerDetails.Include(c=>c.Address).Include("ProductStatus").ToListAsync();
-            return customerModel;
+            //var customerModel= await dbContext.CustomerDetails.Include(c=>c.Address).Include("ProductStatus").ToListAsync();
+            var customerModel= dbContext.CustomerDetails.Include(c => c.Address).Include("ProductStatus").AsQueryable();
+
+            //Filtering
+            if (string.IsNullOrWhiteSpace(filterOn) == false && string.IsNullOrWhiteSpace(filterQuery) == false)
+            {
+                if (filterOn.Equals("CustomerName", StringComparison.OrdinalIgnoreCase))
+                {
+                    customerModel = customerModel.Where(x => x.CustomerName.Contains(filterQuery));
+                }
+            }
+
+            //Sorting
+            if (string.IsNullOrWhiteSpace(sortBy)==false)
+            {
+                if (sortBy.Equals("CustomerName", StringComparison.OrdinalIgnoreCase))
+                {
+                    customerModel = isAscending ? customerModel.OrderBy(x => x.CustomerName) : customerModel.OrderByDescending(x => x.CustomerName);
+                }
+                else if (sortBy.Equals("PostalCode", StringComparison.OrdinalIgnoreCase))
+                {
+                    customerModel = isAscending ? customerModel.OrderBy(x => x.CustomerEmail) : customerModel.OrderByDescending(x => x.CustomerEmail);
+                }
+            }
+
+            return await customerModel.ToListAsync();
         }
 
         public async Task<CustomerDetails?> GetCustomerByIdAsync(Guid id)

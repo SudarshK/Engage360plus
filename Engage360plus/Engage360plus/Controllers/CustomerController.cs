@@ -32,15 +32,13 @@ namespace Engage360plus.Controllers
                 return Ok(mapper.Map<CustomerDetailsDto>(customerDetailsModel));
         }
 
-        //https://localhost:portnumber/api/customer
+        //https://localhost:portnumber/api/customer?filterOn=Name&filterQuery=Track
         [HttpGet]
-        public async Task<IActionResult> GetAllAsync()
+        public async Task<IActionResult> GetAllAsync([FromQuery]string? filterOn, [FromQuery] string? filterQuery,
+            [FromQuery] string? sortBy, [FromQuery] bool isAscending)
         {
-            
-                var customerDomainModel = await customerRepository.GetAllCustomerAsync();
-
+                var customerDomainModel = await customerRepository.GetAllCustomerAsync(filterOn, filterQuery,sortBy,isAscending);
                 return Ok(mapper.Map<List<CustomerDetailsDto>>(customerDomainModel));
-            
         }
 
         [HttpGet]
