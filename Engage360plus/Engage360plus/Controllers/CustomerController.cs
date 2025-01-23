@@ -3,6 +3,7 @@ using Engage360plus.CustomActionFilters;
 using Engage360plus.Models.Domain;
 using Engage360plus.Models.DTO;
 using Engage360plus.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 // Install packages MicrosoftEntityFrameworkCore.SqlServer and MicrosoftEntityFrameworkCore.Tools
 namespace Engage360plus.Controllers
@@ -10,6 +11,7 @@ namespace Engage360plus.Controllers
     //https://localhost:portnumber/api/customer
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CustomerController : ControllerBase
     {
         private readonly IMapper mapper;

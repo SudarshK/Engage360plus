@@ -3,12 +3,14 @@ using Engage360plus.Data;
 using Engage360plus.Models.Domain;
 using Engage360plus.Models.DTO;
 using Engage360plus.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Engage360plus.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AddressesController : ControllerBase
     {
         private readonly CRMDbContext dbContext;
