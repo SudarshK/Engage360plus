@@ -16,6 +16,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<CRMDbContext>(options=>
 options.UseSqlServer(builder.Configuration.GetConnectionString("CRMConnectionString")));
+builder.Services.AddDbContext<Engage360plusAuthDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("CRMAuthConnectionString")));
 builder.Services.AddScoped<IAddressRepository, SQLAddressRepository>();
 builder.Services.AddScoped<ICustomerRepository , SQLCustomerRepository >();
 //builder.Services.AddScoped<IAddressRepository,InMemoryAddressRepository>();

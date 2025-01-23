@@ -11,7 +11,6 @@ namespace Engage360plus.Controllers
     //https://localhost:portnumber/api/customer
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class CustomerController : ControllerBase
     {
         private readonly IMapper mapper;

@@ -5,7 +5,7 @@ namespace Engage360plus.Data
 {
     public class CRMDbContext:DbContext
     {
-        public CRMDbContext(DbContextOptions dbContextOptions): base(dbContextOptions)
+        public CRMDbContext(DbContextOptions<CRMDbContext> dbContextOptions): base(dbContextOptions)
         {
             
         }
