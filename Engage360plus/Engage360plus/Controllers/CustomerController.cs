@@ -35,9 +35,9 @@ namespace Engage360plus.Controllers
         //https://localhost:portnumber/api/customer?filterOn=Name&filterQuery=Track
         [HttpGet]
         public async Task<IActionResult> GetAllAsync([FromQuery]string? filterOn, [FromQuery] string? filterQuery,
-            [FromQuery] string? sortBy, [FromQuery] bool isAscending)
+            [FromQuery] string? sortBy, [FromQuery] bool isAscending, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize=10)
         {
-                var customerDomainModel = await customerRepository.GetAllCustomerAsync(filterOn, filterQuery,sortBy,isAscending);
+                var customerDomainModel = await customerRepository.GetAllCustomerAsync(filterOn, filterQuery,sortBy,isAscending,pageNumber,pageSize);
                 return Ok(mapper.Map<List<CustomerDetailsDto>>(customerDomainModel));
         }
 
