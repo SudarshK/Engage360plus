@@ -14,7 +14,7 @@ namespace Engage360plus.Repository
             this.dbContext = dbContext;
         }
 
-        public async Task<List<CustomerDetails>> GetAllCustomerAsync(string? filterOn = null, string? filterQuery = null, string? sortBy = null, bool isAscending = true)
+        public async Task<List<CustomerDetails>> GetAllCustomerAsync(string? filterOn = null, string? filterQuery = null, string? sortBy = null, bool isAscending = true, int pageNumber = 1, int pageSize = 10)
         {
             //var customerModel= await dbContext.CustomerDetails.Include(c=>c.Address).Include("ProductStatus").ToListAsync();
             var customerModel= dbContext.CustomerDetails.Include(c => c.Address).Include("ProductStatus").AsQueryable();
@@ -41,7 +41,10 @@ namespace Engage360plus.Repository
                 }
             }
 
-            return await customerModel.ToListAsync();
+            //Pagination
+            var skipResults = (pageNumber - 1) * pageSize;
+            return await customerModel.Skip(skipResults).Take(pageSize).ToListAsync();
+            //return await customerModel.ToListAsync();
         }
 
         public async Task<CustomerDetails?> GetCustomerByIdAsync(Guid id)
