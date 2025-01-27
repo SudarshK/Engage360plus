@@ -10,7 +10,6 @@ namespace Engage360plus.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class AddressesController : ControllerBase
     {
         private readonly CRMDbContext dbContext;
@@ -25,6 +24,7 @@ namespace Engage360plus.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> RegisterAddressToCustomer([FromBody] AddAddresstoCustomerDto addAddressesdto)
         {
             if (ModelState.IsValid == true)
@@ -55,6 +55,7 @@ namespace Engage360plus.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Writer")]
         [Route("{id:Guid}")]
         public async Task<IActionResult> UpdateAddressAsync([FromRoute] Guid id, [FromBody] UpdateAddressDto updateAddressDto)
         {
@@ -92,6 +93,7 @@ namespace Engage360plus.Controllers
 
         //GET: http://localhost:portnumber/
         [HttpGet]
+        [Authorize(Roles ="Reader")]
         public async Task<IActionResult> GetAllAddressesAsync()
         {
             if (ModelState.IsValid == true)
@@ -119,6 +121,7 @@ namespace Engage360plus.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Reader")]
         [Route("id:Guid")]
         public async Task<IActionResult> GetAddressById(Guid id)
         {
@@ -146,6 +149,7 @@ namespace Engage360plus.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Writer,Reader")]
         [Route("{id:Guid}")]
         public async Task<IActionResult> DeleteAddressAsync([FromRoute] Guid id)
         {
