@@ -38,8 +38,9 @@ namespace Engage360plus.Controllers
         public async Task<IActionResult> GetAllAsync([FromQuery]string? filterOn, [FromQuery] string? filterQuery,
             [FromQuery] string? sortBy, [FromQuery] bool isAscending, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize=10)
         {
-                var customerDomainModel = await customerRepository.GetAllCustomerAsync(filterOn, filterQuery,sortBy,isAscending,pageNumber,pageSize);
-                return Ok(mapper.Map<List<CustomerDetailsDto>>(customerDomainModel));
+            var customerDomainModel = await customerRepository.GetAllCustomerAsync(filterOn, filterQuery,sortBy,isAscending,pageNumber,pageSize);
+            throw new Exception("This is a new exception");   
+            return Ok(mapper.Map<List<CustomerDetailsDto>>(customerDomainModel));
         }
 
         [HttpGet]

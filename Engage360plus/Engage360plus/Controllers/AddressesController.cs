@@ -5,6 +5,7 @@ using Engage360plus.Models.DTO;
 using Engage360plus.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace Engage360plus.Controllers
 {
@@ -15,12 +16,14 @@ namespace Engage360plus.Controllers
         private readonly CRMDbContext dbContext;
         private readonly IAddressRepository addressRepository;
         private readonly IMapper mapper;
+        private readonly ILogger<AddressesController> log;
 
-        public AddressesController(CRMDbContext dbContext, IAddressRepository addressRepository, IMapper mapper)
+        public AddressesController(CRMDbContext dbContext, IAddressRepository addressRepository, IMapper mapper, ILogger<AddressesController> log)
         {
             this.dbContext = dbContext;
             this.addressRepository = addressRepository;
             this.mapper = mapper;
+            this.log = log;
         }
 
         [HttpPost]
@@ -93,10 +96,11 @@ namespace Engage360plus.Controllers
 
         //GET: http://localhost:portnumber/
         [HttpGet]
-        [Authorize(Roles ="Reader")]
+        //[Authorize(Roles ="Reader")]
         public async Task<IActionResult> GetAllAddressesAsync()
         {
-            if (ModelState.IsValid == true)
+            log.LogInformation("GetAll Address action method invoked");
+            try
             {
                 //var addressesDomain = await dbContext.Addresses.ToListAsync();
                 var addressesDomain = await addressRepository.GetAllAddressesAsync();
@@ -115,9 +119,15 @@ namespace Engage360plus.Controllers
 
                 //Map Domain Model to Dto
                 var addressDto = mapper.Map<List<AddressesDto>>(addressesDomain);
+                log.LogInformation($"FInished GetAllAddress request with data:{JsonSerializer.Serialize(addressDto)}");
                 return Ok(addressDto);
             }
-            return BadRequest(ModelState);
+            catch (Exception ex)
+            {
+                log.LogError(ex,ex.Message);
+                throw;
+            }
+            
         }
 
         [HttpGet]
