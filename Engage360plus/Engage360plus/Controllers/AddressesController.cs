@@ -27,7 +27,7 @@ namespace Engage360plus.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Writer")]
+        //[Authorize(Roles = "Writer")]
         public async Task<IActionResult> RegisterAddressToCustomer([FromBody] AddAddresstoCustomerDto addAddressesdto)
         {
             if (ModelState.IsValid == true)
@@ -58,7 +58,7 @@ namespace Engage360plus.Controllers
         }
 
         [HttpPut]
-        [Authorize(Roles = "Writer")]
+        //[Authorize(Roles = "Writer")]
         [Route("{id:Guid}")]
         public async Task<IActionResult> UpdateAddressAsync([FromRoute] Guid id, [FromBody] UpdateAddressDto updateAddressDto)
         {
@@ -131,7 +131,7 @@ namespace Engage360plus.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Reader")]
+        //[Authorize(Roles = "Reader")]
         [Route("id:Guid")]
         public async Task<IActionResult> GetAddressById(Guid id)
         {
@@ -159,7 +159,7 @@ namespace Engage360plus.Controllers
         }
 
         [HttpDelete]
-        [Authorize(Roles = "Writer,Reader")]
+        //[Authorize(Roles = "Writer,Reader")]
         [Route("{id:Guid}")]
         public async Task<IActionResult> DeleteAddressAsync([FromRoute] Guid id)
         {
