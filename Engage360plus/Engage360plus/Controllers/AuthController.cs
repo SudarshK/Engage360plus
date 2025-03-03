@@ -74,6 +74,5 @@ namespace Engage360plus.Controllers
             }
             return BadRequest("User or password incorrect");
         }
-
     }
 }
