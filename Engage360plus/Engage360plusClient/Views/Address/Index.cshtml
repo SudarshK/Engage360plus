@@ -13,6 +13,7 @@
             <th>Country</th>
             <th>Region</th>
             <th>PostalCode</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -24,6 +25,9 @@
                 <td>@customer.Country</td>
                 <td>@customer.Region</td>
                 <td>@customer.PostalCode</td>
+                <td>
+                    <a asp-controller="Address" asp-action="Edit" asp-route-id="@customer.Id" class="btn btn-light">Edit</a>
+                </td>
             </tr>
         }
     </tbody>
